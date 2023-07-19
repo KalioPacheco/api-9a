@@ -34,13 +34,44 @@ function getUser(req, res) {
     .catch((error) => res.send(error))
 }
 
+function updateUser(req, res) {
+    const { auth } = req;
+    const {
+        email,
+        displayName,
+        newPassword
+    } = req.body;
+
+    Controller.updateUser({
+        auth,
+        email,
+        displayName,
+        newPassword
+    })
+    .then((result) => res.send(result))
+    .catch((error) => res.send(error))
+}
+
+function deleteUser(req, res) {
+    const { auth } = req;
+    const { email } = req.body;
+
+    Controller.deleteUser({
+        auth,
+        email
+    })
+    .then((result) => res.send(result))
+    .catch((error) => res.send(error))
+}
+
 // /users post agregar
 // /users patch actualizar
 // /users delete eliminar
 // /users get obtener
 
+router.delete("/", deleteUser)
 router.post("/", addUser)
 router.get("/get-user", getUser)
-router.patch("/", () => {})
+router.patch("/", updateUser)
 
 module.exports = router
