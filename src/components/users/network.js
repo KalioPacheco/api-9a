@@ -1,5 +1,6 @@
 const express = require("express");
 const Controller = require("./controller")
+const {success, error} = require("../../network")
 
 const router = express.Router();
 
@@ -17,8 +18,8 @@ function addUser(req, res) {
         password,
         displayName
     })
-    .then((result) => res.send(result))
-    .catch((error) => res.send(error))
+    .then((result) => success(req, res, result, 201))
+    .catch((error) => error(req, res, error, 500))
 
 }
 
@@ -30,8 +31,8 @@ function getUser(req, res) {
         auth,
         email
     })
-    .then((result) => res.send(result))
-    .catch((error) => res.send(error))
+    .then((result) => success(req, res, result, 201))
+    .catch((error) => error(req, res, error, 500))
 }
 
 function updateUser(req, res) {
@@ -48,8 +49,8 @@ function updateUser(req, res) {
         displayName,
         newPassword
     })
-    .then((result) => res.send(result))
-    .catch((error) => res.send(error))
+    .then((result) => success(req, res, result, 201))
+    .catch((error) => error(req, res, error, 500))
 }
 
 function deleteUser(req, res) {
@@ -60,8 +61,8 @@ function deleteUser(req, res) {
         auth,
         email
     })
-    .then((result) => res.send(result))
-    .catch((error) => res.send(error))
+    .then((result) => success(req, res, result, 201))
+    .catch((error) => error(req, res, error, 500))
 }
 
 // /users post agregar
